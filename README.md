@@ -11,6 +11,9 @@ Jimmy > I await the waves
 Lita > Garth, that was a haiku!
 ```
 
+![](http://28.media.tumblr.com/tumblr_l92fudoiME1qas5kdo1_500.png)
+
+
 ## Installation
 
 Add lita-poetry to your Lita instance's Gemfile:
