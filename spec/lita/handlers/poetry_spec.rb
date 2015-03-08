@@ -45,17 +45,46 @@ describe Lita::Handlers::Poetry, lita_handler: true do
 
       send_message("In the ponds cool depths")
       send_message("the happy frog plays in spring")
-      send_message("his life, a slow game")
+      send_message("his life, a slow game.")
 
-      send_message("Summer's arid heat")
+      send_message("Summer’s arid heat")
       send_message("the dry parched earth welcomes me")
       send_message("my blood nourishing.")
 
-      expect(replies.size).to eq(5)
+      send_message("Sheltering cherry")
+      send_message("my last breath stirs your blossom")
+      send_message("my soul ascends. Meh.")
+
+      send_message("Autumn maple leaves")
+      send_message("their colours, like the harvest")
+      send_message("remind me of home.")
+
+      send_message("A soul ship finds me")
+      send_message("crystal waters call my name")
+      send_message("I am dragged below.")
+
+      send_message("Noble enemy")
+      send_message("I mourn your loss as I mourned")
+      send_message("for my first-born son.")
+
+      send_message("The old carp is wise")
+      send_message("he whispers his dark secrets")
+      send_message("only the wind hears.")
+
+      send_message("The dark tiger stalks")
+      send_message("my soul quivers in the air")
+      send_message("just for a moment.")
+
+      send_message("Raindrops on the lake")
+      send_message("a universe of ripples")
+      send_message("center touching all.")
+
+      send_message("Leaves turn green to gold")
+      send_message("not to end but to transform")
+      send_message("as flesh rots to dust.")
+
+      expect(replies.size).to eq(13)
     end
-
-
-
 
   end
 
