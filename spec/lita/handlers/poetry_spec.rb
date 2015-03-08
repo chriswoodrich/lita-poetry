@@ -9,11 +9,9 @@ describe Lita::Handlers::Poetry, lita_handler: true do
   describe '#process' do
     before {robot.trigger(:loaded)}
     it 'tells Garth or the poetic user that (s)he has written a Haiku' do
-
       send_message("dainty daffodil")
-      send_message("your golden trumpet fanfare")
+      send_message("your golden trumpet fanfares")
       send_message("the dawning of spring")
-
       expect(replies.last).to eq('Garth, that was a haiku!')
     end
 
@@ -29,6 +27,31 @@ describe Lita::Handlers::Poetry, lita_handler: true do
       send_message("And grievously hath Caesar answer’d it.")
 
       expect(replies.size).to eq(0)
+    end
+
+    it 'handles a varierty of different ways to get to 5-7-5' do
+
+      send_message("Amongst these are the")
+      send_message("Haiku Hating Haiku Bros")
+      send_message("Oh the irony.")
+
+      send_message("To spread their evil")
+      send_message("They hate haiku through Hiakus")
+      send_message("Here is their worst deeds.")
+
+      send_message("haiku are easy")
+      send_message("But some times they dont make sense")
+      send_message("Refrigerator")
+
+      send_message("In the ponds cool depths")
+      send_message("the happy frog plays in spring")
+      send_message("his life, a slow game")
+
+      send_message("Summer's arid heat")
+      send_message("the dry parched earth welcomes me")
+      send_message("my blood nourishing.")
+
+      expect(replies.size).to eq(5)
     end
 
 

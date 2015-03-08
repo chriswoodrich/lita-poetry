@@ -39,34 +39,21 @@ module Lita
       end
 
       def process_sentence(sentence)
-
+        sentence.gsub!("'", "")
+        sentence.gsub!(",","")
+        sentence.gsub!(".","")
         words = sentence.split(' ')
-
         return words.map{|word| count_syllables(word)}.inject(:+)
-
       end
 
 
       def count_syllables(word)
 
-        tokenizer = /([aeiouy]{1,3})/
-        len = 0
-
-        if word[-3..-1] == 'ing' then
-          len += 1
-          word = word[0...-3]
-        end
-
-        got = word.scan(tokenizer)
-        len += got.size()
-
-        if got.size() > 1 and got[-1] == ['e'] and
-            word[-1].chr() == 'e' and
-            word[-2].chr() != 'l' then
-          len -= 1
-        end
-
-        return len
+        word.downcase!
+        return 1 if word.length <= 3
+        word.sub!(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '')
+        word.sub!(/^y/, '')
+        word.scan(/[aeiouy]{1,2}/).size
 
       end
 
@@ -78,12 +65,8 @@ module Lita
           (3 - length).times do
             redis.rpush('data', MultiJson.dump({'id' => 0, 'count' => 0 }))
           end
-
         end
-
       end
-
-
     end
     Lita.register_handler(Poetry)
   end
