@@ -2,7 +2,14 @@
 
 # lita-poetry
 
-TODO: Add a description of the plugin.
+Lita-poetry passively listens for haikus (accidential or not) and alerts the channel when a haiku has formed.
+
+```
+Jimmy > Flash of steel stills me
+Jimmy > calmness mirrors the ocean
+Jimmy > I await the waves
+Lita > Garth, that was a haiku!
+```
 
 ## Installation
 
