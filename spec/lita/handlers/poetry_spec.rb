@@ -86,6 +86,14 @@ describe Lita::Handlers::Poetry, lita_handler: true do
       expect(replies.size).to eq(13)
     end
 
+    xit "Handles special situations and special vowel rules" do
+      send_message("The Boa from Goa")
+      send_message("Weighed nearly eight hundred tonnes")
+      send_message("He loved his deer pie")
+      expect(replies.last).to eq('Garth, that was a haiku!')
+
+    end
+
   end
 
 
