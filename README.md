@@ -2,7 +2,7 @@
 
 # lita-poetry
 
-Lita-poetry passively listens for haikus (accidential or not) and alerts the channel when a haiku has formed.
+Lita-poetry passively listens for haikus (accidental or not) and alerts the channel when a haiku has formed.
 
 ```
 Jimmy > Flash of steel stills me
@@ -24,7 +24,12 @@ gem "lita-poetry"
 
 ## Configuration
 
-No configuration is needed in this version.
+strict_mode (defaults to false) will only allow haikus by a single user, whereas disabling strict_mode will allow multi-user haikus.
+```
+Lita.configure do |config|
+  config.handlers.poetry.strict_mode = true || false
+end
+```
 
 ## License
 

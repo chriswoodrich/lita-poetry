@@ -5,6 +5,11 @@ describe Lita::Handlers::Poetry, lita_handler: true do
   it {is_expected.to route_event(:loaded).to(:populate)}
   it {is_expected.to route('a string').to(:process)}
 
+  before do
+    registry.config.handlers.poetry.strict_mode = true;
+  end
+
+
 
   describe '#process' do
     before {robot.trigger(:loaded)}
@@ -24,7 +29,7 @@ describe Lita::Handlers::Poetry, lita_handler: true do
       send_message("So let it be with Caesar. The noble Brutus")
       send_message("Hath told you Caesar was ambitious:")
       send_message("If it were so, it was a grievous fault,")
-      send_message("And grievously hath Caesar answer’d it.")
+      send_message("And grievously hath Caesar answer\’d it.")
 
       expect(replies.size).to eq(0)
     end

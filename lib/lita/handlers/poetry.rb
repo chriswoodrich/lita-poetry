@@ -8,6 +8,8 @@ module Lita
 
       @lock = Mutex.new
 
+      config :strict_mode, types: [TrueClass, FalseClass], default: false
+
       route(/.+/, :process)
       on(:loaded, :populate)
 
@@ -32,7 +34,10 @@ module Lita
         one = MultiJson.load(one)
         two = MultiJson.load(two)
 
-        return unless one['id'] == two['id'] && two['id'] == three['id']
+        if config.strict_mode == true
+          return unless one['id'] == two['id'] && two['id'] == three['id']
+        end
+
         if one['count'] == 5 && two['count'] == 7 && three['count'] == 5
           request.reply('Garth, that was a haiku!')
         end
