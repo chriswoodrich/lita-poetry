@@ -31,6 +31,17 @@ Lita.configure do |config|
 end
 ```
 
+##Usage
+Three commands are available: ```haiku last```, ```haiku total```, and ```haiku get [integer]```
+```You > Litabot: haiku last
+Litabot > haiku are easy; But some times they dont make sense; Refrigerator
+You > Litabot: haiku total
+Litabot > 5
+You > Litabot: haiku get 3
+Litabot > In the ponds cool depths; the happy frog plays in spring; his life a slow game
+```
+
+
 ## License
 
 [MIT](http://opensource.org/licenses/MIT)

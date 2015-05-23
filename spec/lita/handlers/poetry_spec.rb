@@ -1,22 +1,24 @@
 require "spec_helper"
 
+
 describe Lita::Handlers::Poetry, lita_handler: true do
 
   it {is_expected.to route_event(:loaded).to(:populate)}
   it {is_expected.to route('a string').to(:process)}
+  it { is_expected.to route_command("haiku last").to(:get_last_haiku) }
+  it { is_expected.to route_command("haiku total").to(:get_total_haikus) }
+  it { is_expected.to route_command("haiku get 5").to(:get_specific_haiku) }
+
+
 
   before do
     registry.config.handlers.poetry.strict_mode = true;
   end
 
-
-
   describe '#process' do
     before {robot.trigger(:loaded)}
     it 'tells Garth or the poetic user that (s)he has written a Haiku' do
-      send_message("dainty daffodil")
-      send_message("your golden trumpet fanfares")
-      send_message("the dawning of spring")
+      simple_haiku
       expect(replies.last).to eq('Garth, that was a haiku!')
     end
 
@@ -40,17 +42,7 @@ describe Lita::Handlers::Poetry, lita_handler: true do
       send_message("Haiku Hating Haiku Bros")
       send_message("Oh the irony.")
 
-      send_message("To spread their evil")
-      send_message("They hate haiku through Hiakus")
-      send_message("Here is their worst deeds.")
-
-      send_message("haiku are easy")
-      send_message("But some times they dont make sense")
-      send_message("Refrigerator")
-
-      send_message("In the ponds cool depths")
-      send_message("the happy frog plays in spring")
-      send_message("his life, a slow game.")
+      three_good_ones
 
       send_message("Summer’s arid heat")
       send_message("the dry parched earth welcomes me")
@@ -96,11 +88,67 @@ describe Lita::Handlers::Poetry, lita_handler: true do
       send_message("Weighed nearly eight hundred tonnes")
       send_message("He loved his deer pie")
       expect(replies.last).to eq('Garth, that was a haiku!')
+    end
+  end
 
+  describe '#get_last_haiku' do
+    it "handles the situation where there are no saved haikus" do
+      send_command('haiku last')
+      expect(replies.last).to eq('Rain falls softly now; it is a sad day when you; have no saved haikus')
     end
 
+    it "retrieves the last saved haiku with semicolons between lines" do
+      simple_haiku
+      send_command('haiku last')
+      expect(replies.last).to eq("dainty daffodil" + "; " "your golden trumpet fanfares"  + "; " + "the dawning of spring")
+    end
+  end
+
+  describe '#get_total_haikus' do
+    it "returns the total number of saved haikus" do
+      3.times { simple_haiku }
+      send_command('haiku total')
+      expect(replies.last).to eq("3 haikus total")
+    end
+  end
+
+  describe '#get_specific_haiku' do
+    it "gets a spefic haiku based on its index" do
+      three_good_ones
+      send_command('haiku get 2')
+      expect(replies.last).to eq("haiku are easy" + "; " + "But some times they dont make sense" + "; " "Refrigerator")
+
+      send_command('haiku get 3')
+      expect(replies.last).to eq("In the ponds cool depths" + "; " + "the happy frog plays in spring" + "; " "his life a slow game")
+    end
+
+    it "does nothing if the user selects a haiku that doesn not exist" do
+      three_good_ones
+      send_command('haiku get 9000')
+      expect(replies.size).to eq(3)
+    end
+  end
+
+  def three_good_ones
+    send_message("To spread their evil")
+    send_message("They hate haiku through Hiakus")
+    send_message("Here is their worst deeds.")
+
+    send_message("haiku are easy")
+    send_message("But some times they dont make sense")
+    send_message("Refrigerator")
+
+    send_message("In the ponds cool depths")
+    send_message("the happy frog plays in spring")
+    send_message("his life a slow game")
+  end
+
+  def simple_haiku
+    send_message("dainty daffodil")
+    send_message("your golden trumpet fanfares")
+    send_message("the dawning of spring")
   end
 
 
-
 end
+
