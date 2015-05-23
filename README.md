@@ -33,7 +33,8 @@ end
 
 ##Usage
 Three commands are available: ```haiku last```, ```haiku total```, and ```haiku get [integer]```
-```You > Litabot: haiku last
+```
+You > Litabot: haiku last
 Litabot > haiku are easy; But some times they dont make sense; Refrigerator
 You > Litabot: haiku total
 Litabot > 5
