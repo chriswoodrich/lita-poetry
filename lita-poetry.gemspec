@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name          = "lita-poetry"
-  spec.version       = "0.2.0"
+  spec.version       = "0.2.1"
   spec.authors       = ["Chris Woodrich"]
   spec.email         = ["cwoodrich@gmail.com"]
   spec.description   = "A Haiku detector for Lita"
