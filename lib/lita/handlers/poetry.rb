@@ -62,10 +62,8 @@ module Lita
       end
 
       def process_sentence(sentence)
-        sentence.gsub!("'", "")
-        sentence.gsub!(",","")
-        sentence.gsub!(".","")
-        words = sentence.split(' ')
+        processed_sentence = sentence.gsub("'", "").gsub(",","").gsub(".","")
+        words = processed_sentence.split(' ')
         return words.map{|word| count_syllables(word)}.inject(:+)
       end
 
