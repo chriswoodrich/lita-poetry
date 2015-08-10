@@ -84,7 +84,7 @@ describe Lita::Handlers::Poetry, lita_handler: true do
     end
 
     it 'ignores uri type sentences' do
-      send_message('www.onetwothree.com') # 5 "syallbles"
+      send_message('http://onetwothree.com') # 5 "syallbles"
       send_message("your golden trumpet fanfares")
       send_message("the dawning of spring")
       expect(replies.size).to eq 0

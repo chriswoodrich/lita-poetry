@@ -112,9 +112,7 @@ module Lita
       def is_uri?(string)
         uri = URI.parse(string)
         %w(http https).include?(uri.scheme) || uri.to_s.include?('www')
-      rescue URI::BadURIError
-        false
-      rescue URI::InvalidURIError
+      rescue Exception
         false
       end
 
