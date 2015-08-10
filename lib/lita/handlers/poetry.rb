@@ -62,6 +62,7 @@ module Lita
       end
 
       def process_sentence(sentence)
+        return false if is_uri?(sentence)
         processed_sentence = sentence.gsub("'", "").gsub(",","").gsub(".","")
         words = processed_sentence.split(' ')
         return words.map{|word| count_syllables(word)}.inject(:+)
@@ -106,6 +107,15 @@ module Lita
 
       def get_total_haikus(request)
         request.reply("#{redis.llen('saved_haikus')} haikus total")
+      end
+
+      def is_uri?(string)
+        uri = URI.parse(string)
+        %w(http https).include?(uri.scheme) || uri.to_s.include?('www')
+      rescue URI::BadURIError
+        false
+      rescue URI::InvalidURIError
+        false
       end
 
     end

@@ -83,6 +83,13 @@ describe Lita::Handlers::Poetry, lita_handler: true do
       expect(replies.size).to eq(13)
     end
 
+    it 'ignores uri type sentences' do
+      send_message('www.onetwothree.com') # 5 "syallbles"
+      send_message("your golden trumpet fanfares")
+      send_message("the dawning of spring")
+      expect(replies.size).to eq 0
+    end
+
     xit "Handles special situations and special vowel rules" do
       send_message("The Boa from Goa")
       send_message("Weighed nearly eight hundred tonnes")
